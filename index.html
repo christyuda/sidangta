@@ -92,7 +92,7 @@
     <body class="r" style="background: #edf2f7;">
         <div class="h-screen">
 
-<div x-data="app()"  x-init="initialize()">
+<div x-data="app()">
     <div class="max-w-3xl mx-auto px-4 py-10">
 
         <div x-show.transition="step === 'complete'">
@@ -119,28 +119,7 @@
                 </div>
             </div>
         </div>
-        <div id="successSection" style="display: none;">
-            <div class="bg-white rounded-lg p-10 flex items-center shadow justify-between">
-                <div>
-                    <svg class="mb-4 h-20 w-20 text-green-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd" />
-                    </svg>
-    
-                    <h2 class="text-2xl mb-4 text-gray-800 text-center font-bold">Registration Success</h2>
-    
-                    <div class="text-gray-600 mb-8">
-                        Thank you. We have sent you an email to demo@demo.test. Please click the link in the message to
-                        activate your account.
-                    </div>
-    
-                    <button onclick="showHomeView()"
-                        class="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border">Back
-                        to home</button>
-                </div>
-            </div>
-        </div>
+        
 
         <div x-show.transition="step !== 'complete'">
             <!-- Top Navigation -->
@@ -182,40 +161,40 @@
                         <label for="npm" class="font-bold mb-1 text-gray-700 block">NPM</label>
                         <input type="text"
                             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                            placeholder="Masukkan NPM" x-model="data.npm" required>
+                            placeholder="Masukkan NPM" >
                     </div>
                     
                     <div class="mb-5">
                         <label for="nama" class="font-bold mb-1 text-gray-700 block">Nama Lengkap</label>
                         <input type="text"
                             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                            placeholder="Masukkan Nama Lengkap" x-model="data.nama" required>
+                            placeholder="Masukkan Nama Lengkap" >
                     </div>
                     
                     <div class="mb-5">
                         <label for="judul" class="font-bold mb-1 text-gray-700 block">Judul</label>
                         <textarea
                             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                            placeholder="Masukkan Judul" x-model="data.judul" required></textarea>
+                            placeholder="Masukkan Judul"  ></textarea>
                     </div>
 
                     <div class="mb-5">
                         <label for="pembimbing1" class="font-bold mb-1 text-gray-700 block">Masukkan Pembimbing 1</label>
                         <input type="text"
                             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                            placeholder="Masukkan Pembimbing 1"x-model="data.pembimbing1" required">
+                            placeholder="Masukkan Pembimbing 1">
                     </div>
                     <div class="mb-5">
                         <label for="pembimbing2" class="font-bold mb-1 text-gray-700 block">Masukkan Pembimbing 2</label>
                         <input type="text"
                             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                            placeholder="Masukkan Pembimbing 2"x-model="data.pembimbing2" required">
+                            placeholder="Masukkan Pembimbing 2">
                     </div>
                     <div class="mb-5">
                         <label for="penguji" class="font-bold mb-1 text-gray-700 block">Masukkan Penguji</label>
                         <input type="text"
                             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                            placeholder="Masukkan Penguji"x-model="data.penguji" required">
+                            placeholder="Masukkan Penguji">
                     </div>
 
 
@@ -265,8 +244,6 @@
                         </span>
                       </label>
                     </div>
-
-                
                   </div>
                 
                   <div x-show.transition.in="step === 3">
@@ -377,7 +354,7 @@
                     </div>
 
                     <div class="w-1/2 text-right">
-                        <button x-show="step < 3" @click="validateStep(step, step + 1)"
+                        <button x-show="step < 3 " @click="step++"
                             class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium">Next</button>
 
                             <button id="completeButton"  x-show="step === 3" @click="confirmSubmit()"
@@ -394,7 +371,7 @@
 <script>
     function app() {
         return {
-            step: 1,
+            step: 2,
             data: {
                 npm: '',
                 nama: '',
@@ -406,39 +383,7 @@
             initialize() {
                 // Add any additional initialization here
             },
-            validateStep(currentStep, nextStep) {
-                // Add your validation logic here for each step
-                if (currentStep === 1) {
-                    if (
-                        !this.data.npm ||
-                        !this.data.nama ||
-                        !this.data.judul ||
-                        !this.data.pembimbisng1 ||
-                        !this.data.pembimbing2 ||
-                        !this.data.penguji
-                    ) {
-                        alert("Silakan isi semua data pada langkah ini sebelum melanjutkan.");
-                        return;
-                    }
-                } else if (currentStep === 2) {
-                    // Validate file inputs in step 2
-                    if (!this.isFileSelected('fileInput1') || !this.isFileSelected('fileInput2') || !this.isFileSelected('fileInput3')) {
-                        alert("Silakan pilih semua file pada langkah ini sebelum melanjutkan.");
-                        return;
-                    }
-                } else if (currentStep === 3) {
-                    // Validate form inputs in step 3
-                    if (
-                        !this.isFileSelected('fileInput9')
-                    ) {
-                        alert("Silakan pilih semua file pada langkah ini sebelum melanjutkan.");
-                        return;
-                    }
-                }
-
-                // If validation passes, proceed to the next step
-                this.step = nextStep;
-            },
+            
             isFileSelected(inputId) {
                 const fileInput = document.getElementById(inputId);
                 return fileInput && fileInput.files && fileInput.files.length > 0;
@@ -466,6 +411,7 @@
     }
     
 </script>
+
 <script>
     // Add click event listener to the "Complete" button
     document.getElementById('completeButton').addEventListener('click', function() {
