@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/tailwindcss@1.2.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+ 
+	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-nAKb71zfydW/9Gb3fDYR0JXHyP+I82wGxGfNkNcLPe2U9Tl5IJe50kChF2sgv4Tqt40IlLOg2yNOtEd4egEzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"
+        integrity="sha256-PwzQfPzjnCwZqk6sg6D26IxFQ8K1bjfVChBEu3mxyRo=" crossorigin="anonymous"></script>
+    <script src="js/script.js" type="module"></script>
+    <script src="js/app.js"></script>
+
+	<style>
+		[x-cloak] {
+			display: none;
+		}
+
+		[type="checkbox"] {
+			box-sizing: border-box;
+			padding: 0;
+		}
+
+		.form-checkbox,
+		.form-radio {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			-webkit-print-color-adjust: exact;
+			color-adjust: exact;
+			display: inline-block;
+			vertical-align: middle;
+			background-origin: border-box;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			flex-shrink: 0;
+			color: currentColor;
+			background-color: #fff;
+			border-color: #e2e8f0;
+			border-width: 1px;
+			height: 1.4em;
+			width: 1.4em;
+		}
+
+		.form-checkbox {
+			border-radius: 0.25rem;
+		}
+
+		.form-radio {
+			border-radius: 50%;
+		}
+
+		.form-checkbox:checked {
+			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+			border-color: transparent;
+			background-color: currentColor;
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+		
+		.form-radio:checked {
+			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+			border-color: transparent;
+			background-color: currentColor;
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+	</style>
+    <body class="r" style="background: #edf2f7;">
+        <div class="h-screen">
+
+<div x-data="app()"  x-init="initialize()">
+    <div class="max-w-3xl mx-auto px-4 py-10">
+
+        <div x-show.transition="step === 'complete'">
+            <div id="successSection" style="display: none;">
+                <div class="bg-white rounded-lg p-10 flex items-center shadow justify-between">
+                    <div>
+                        <svg class="mb-4 h-20 w-20 text-green-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd" />
+                        </svg>
+        
+                        <h2 class="text-2xl mb-4 text-gray-800 text-center font-bold">Registration Success</h2>
+        
+                        <div class="text-gray-600 mb-8">
+                            Thank you. We have sent you an email to demo@demo.test. Please click the link in the message to
+                            activate your account.
+                        </div>
+        
+                        <button onclick="showHomeView()"
+                            class="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border">Back
+                            to home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="successSection" style="display: none;">
+            <div class="bg-white rounded-lg p-10 flex items-center shadow justify-between">
+                <div>
+                    <svg class="mb-4 h-20 w-20 text-green-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+    
+                    <h2 class="text-2xl mb-4 text-gray-800 text-center font-bold">Registration Success</h2>
+    
+                    <div class="text-gray-600 mb-8">
+                        Thank you. We have sent you an email to demo@demo.test. Please click the link in the message to
+                        activate your account.
+                    </div>
+    
+                    <button onclick="showHomeView()"
+                        class="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border">Back
+                        to home</button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show.transition="step !== 'complete'">
+            <!-- Top Navigation -->
+            <div class="border-b-2 py-4">
+                <div class="uppercase tracking-wide text-xs font-bold text-gray-500 mb-1 leading-tight"
+                    x-text="`Step: ${step} of 3`"></div>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="flex-1 mr-4">
+                        <div x-show="step === 1">
+                            <div class="text-lg font-bold text-gray-700 leading-tight">Data Tugas Akhir Section 1</div>
+                        </div>
+
+                        <div x-show="step === 2">
+                            <div class="text-lg font-bold text-gray-700 leading-tight">Data Tugas Akhir Section 2</div>
+                        </div>
+
+                        <div x-show="step === 3">
+                            <div class="text-lg font-bold text-gray-700 leading-tight">Data Tugas Akhir Section 3</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center md:w-64">
+                        <div class="w-full bg-white rounded-full mr-2">
+                            <div class="rounded-full bg-green-500 text-xs leading-none h-2 text-center text-white"
+                                :style="'width: '+ parseInt(step / 3 * 100) +'%'"></div>
+                        </div>
+                        <div class="text-xs w-10 text-gray-600"
+                            x-text="parseInt(step / 3 * 100) + '%'"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Top Navigation -->
+
+            <!-- Step Content -->
+            <div class="py-12" >
+                <div x-show.transition.in="step === 1">
+
+                    <div class="mb-5">
+                        <label for="npm" class="font-bold mb-1 text-gray-700 block">NPM</label>
+                        <input type="text"
+                            class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                            placeholder="Masukkan NPM" x-model="data.npm" required>
+                    </div>
+                    
+                    <div class="mb-5">
+                        <label for="nama" class="font-bold mb-1 text-gray-700 block">Nama Lengkap</label>
+                        <input type="text"
+                            class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                            placeholder="Masukkan Nama Lengkap" x-model="data.nama" required>
+                    </div>
+                    
+                    <div class="mb-5">
+                        <label for="judul" class="font-bold mb-1 text-gray-700 block">Judul</label>
+                        <textarea
+                            class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                            placeholder="Masukkan Judul" x-model="data.judul" required></textarea>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="pembimbing1" class="font-bold mb-1 text-gray-700 block">Masukkan Pembimbing 1</label>
+                        <input type="text"
+                            class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                            placeholder="Masukkan Pembimbing 1"x-model="data.pembimbing1" required">
+                    </div>
+                    <div class="mb-5">
+                        <label for="pembimbing2" class="font-bold mb-1 text-gray-700 block">Masukkan Pembimbing 2</label>
+                        <input type="text"
+                            class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                            placeholder="Masukkan Pembimbing 2"x-model="data.pembimbing2" required">
+                    </div>
+                    <div class="mb-5">
+                        <label for="penguji" class="font-bold mb-1 text-gray-700 block">Masukkan Penguji</label>
+                        <input type="text"
+                            class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                            placeholder="Masukkan Penguji"x-model="data.penguji" required">
+                    </div>
+
+
+                </div>
+                <div x-show.transition.in="step === 2">
+                    <div class="mb-5">
+                      <label for="lembarpengesahan" class="font-bold mb-1 text-gray-700 block">Lembar Pengesahan</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel1">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus1" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput1" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner1" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                    <div class="mb-5">
+                      <label for="bapsidang" class="font-bold mb-1 text-gray-700 block">BAP Sidang</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel2">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus2" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput2" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner2" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                    <div class="mb-5">
+                      <label for="plagiarisme" class="font-bold mb-1 text-gray-700 block">Plagiarisme</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel3">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus3" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput3" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner3" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+
+                
+                  </div>
+                
+                  <div x-show.transition.in="step === 3">
+                    <div class="mb-5">
+                      <label for="bab1" class="font-bold mb-1 text-white-700 block">Bab 1</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel4">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus4" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput4" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner4" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                    <div class="mb-5">
+                      <label for="bab2" class="font-bold mb-1 text-gray-700 block">Bab 2</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel5">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus5" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput5" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner5" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                    <div class="mb-5">
+                      <label for="bab3" class="font-bold mb-1 text-white-700 block">Bab 3</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel6">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus6" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput6" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner6" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                    <div class="mb-5">
+                      <label for="bab4" class="font-bold mb-1 text-gray-700 block">Bab 4</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel7">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus7" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput7" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner7" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                    <div class="mb-5">
+                      <label for="bab5" class="font-bold mb-1 text-gray-700 block">Bab 5</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel8">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus8" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput8" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner8" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                    <div class="mb-5">
+                      <label for="lampiran" class="font-bold mb-1 text-gray-700 block">Lampiran</label>
+                      <label class="w-full flex items-center px-4 py-3 rounded-lg shadow-sm border border-gray-300 cursor-pointer bg-white hover:bg-gray-100">
+                        <span class="text-indigo-600">
+                          <i class="fas fa-file-upload text-xl"></i>
+                        </span>
+                        <span class="text-gray-800 font-medium ml-3" id="statusLabel9">Pilih file...</span>
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="fileStatus9" style="display: none;">Belum dipilih</span>
+                        <input type="file" id="fileInput9" class="hidden">
+                        <span class="text-xs ml-auto py-1 px-3 bg-indigo-100 rounded-lg" id="spinner9" style="display: none;">
+                          <div class="spinner"></div>
+                        </span>
+                      </label>
+                    </div>
+                
+                  </div>
+
+            </div>
+            <!-- / Step Content -->
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 py-5 bg-white shadow-md" x-show="step !== 'complete'">
+            <div class="max-w-3xl mx-auto px-4">
+                <div class="flex justify-between">
+                    <div class="w-1/2">
+                        <button x-show="step > 1" @click="step--"
+                            class="w-32 focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border">Previous</button>
+                    </div>
+
+                    <div class="w-1/2 text-right">
+                        <button x-show="step < 3" @click="validateStep(step, step + 1)"
+                            class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium">Next</button>
+
+                            <button id="completeButton"  x-show="step === 3" @click="confirmSubmit()"
+                            class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium">Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+    <!-- / Bottom Navigation -->
+</div>
+
+
+<script>
+    function app() {
+        return {
+            step: 1,
+            data: {
+                npm: '',
+                nama: '',
+                judul: '',
+                pembimbing1: '',
+                pembimbing2: '',
+                penguji: '',
+            },
+            initialize() {
+                // Add any additional initialization here
+            },
+            validateStep(currentStep, nextStep) {
+                // Add your validation logic here for each step
+                if (currentStep === 1) {
+                    if (
+                        !this.data.npm ||
+                        !this.data.nama ||
+                        !this.data.judul ||
+                        !this.data.pembimbisng1 ||
+                        !this.data.pembimbing2 ||
+                        !this.data.penguji
+                    ) {
+                        alert("Silakan isi semua data pada langkah ini sebelum melanjutkan.");
+                        return;
+                    }
+                } else if (currentStep === 2) {
+                    // Validate file inputs in step 2
+                    if (!this.isFileSelected('fileInput1') || !this.isFileSelected('fileInput2') || !this.isFileSelected('fileInput3')) {
+                        alert("Silakan pilih semua file pada langkah ini sebelum melanjutkan.");
+                        return;
+                    }
+                } else if (currentStep === 3) {
+                    // Validate form inputs in step 3
+                    if (
+                        !this.isFileSelected('fileInput9')
+                    ) {
+                        alert("Silakan pilih semua file pada langkah ini sebelum melanjutkan.");
+                        return;
+                    }
+                }
+
+                // If validation passes, proceed to the next step
+                this.step = nextStep;
+            },
+            isFileSelected(inputId) {
+                const fileInput = document.getElementById(inputId);
+                return fileInput && fileInput.files && fileInput.files.length > 0;
+            },
+            goToStep(stepNumber) {
+                // Check if all required fields are filled before proceeding to a specific step
+                if (stepNumber === 2) {
+                    if (!this.data.npm || !this.data.nama || !this.data.judul || !this.data.pembimbing1 || !this.data.pembimbing2 || !this.data.penguji) {
+                        alert("Silakan isi semua data pada langkah pertama sebelum melanjutkan.");
+                        return;
+                    }
+                } else if (stepNumber === 3) {
+                    if (!this.isFileSelected('fileInput1') || !this.isFileSelected('fileInput2') || !this.isFileSelected('fileInput3')) {
+                        alert("Silakan pilih semua file pada langkah kedua sebelum melanjutkan.");
+                        return;
+                    }
+                }
+
+                // If validation passes, go to the specified step
+                this.step = stepNumber;
+            },
+            
+        }
+        
+    }
+    
+</script>
+<script>
+    // Add click event listener to the "Complete" button
+    document.getElementById('completeButton').addEventListener('click', function() {
+        confirmSubmit();
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>
