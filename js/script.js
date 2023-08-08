@@ -54,13 +54,7 @@ function handleFileSelect(fileInputId, statusLabelId, fileStatusId, spinnerId) {
         },
 
         // Function to validate the next step and show alert if not filled correctly
-        validateNext(stepIndex) {
-            if (this.validateStep(stepIndex)) {
-                this.step = stepIndex + 1;
-            } else {
-                this.showAlert();
-            }
-        },
+        
 
         // Function to validate the complete step and show alert if not filled correctly
         validateComplete() {
